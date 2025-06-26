@@ -2,18 +2,17 @@
 CREATE DATABASE IF NOT EXISTS alx_book_store;
 USE alx_book_store;
 
--- Drop existing tables if any (optional, to make sure schema matches)
+-- Drop existing tables to avoid conflicts
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS books;
-DROP TABLE IF EXISTS authors;
+DROP TABLE IF EXISTS Authors;
 
--- Create the authors table
-CREATE TABLE authors (
+-- Create the Authors table
+CREATE TABLE Authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    bio TEXT
+    author_name VARCHAR(100) NOT NULL
 );
 
 -- Create the books table
@@ -23,7 +22,7 @@ CREATE TABLE books (
     author_id INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     stock_quantity INT DEFAULT 0,
-    FOREIGN KEY (author_id) REFERENCES authors(author_id)
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
 
 -- Create the customers table
@@ -53,3 +52,4 @@ CREATE TABLE order_details (
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
+
